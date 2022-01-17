@@ -36,6 +36,22 @@ describe("Three seats available together on a plane ", () => {
        expect(seatAllocation('1E',1)).toEqual(2);
     });
 
+    it('should return 2 if 1F is booked', () => {
+        expect(seatAllocation('1F',1)).toEqual(2);
+    });
+
+    it('should return 2 if 1E and 1F are booked', () => {
+        expect(seatAllocation('1E 1F',1)).toEqual(2);
+    });
+
+    it('should return 1 if 1A and 1E are booked', () => {
+        expect(seatAllocation('1A 1E',1)).toEqual(1);
+    });
+
+    it('should return 3 if 1D is booked', () => {
+        expect(seatAllocation('1D',1)).toEqual(3);
+    });
+
 
     // beforeEach(() => {
     //     currentGame = game();

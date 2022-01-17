@@ -7,5 +7,6 @@ right = ['H','I','J'],
 left and right: if any seats booked, options = 0, else options = 1
 
 middle: if E or F booked, options = 0
+        if any 2 seats booked, options = 0
         if only D or G booked, options = 1
-        if 2 seats booked, options = 0
+        if no seats booked, options = 2
