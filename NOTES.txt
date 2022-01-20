@@ -10,3 +10,9 @@ middle: if E or F booked, options = 0
         if any 2 seats booked, options = 0
         if only D or G booked, options = 1
         if no seats booked, options = 2
+
+2 functions:
+    1. split bookings into rows
+    2. check how many options on that row
+
+if there is an empty row between given bookings, need to give full options - use rows num and range of seat bookings?

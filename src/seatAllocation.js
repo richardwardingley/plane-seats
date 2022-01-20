@@ -1,67 +1,82 @@
 const seatAllocation = (bookings, rows) => {
-    // let gameScore = 0;
-    //
-    // const roll = (pins) => {
-    //     gameScore = gameScore + pins;
-    // }
-    //
-    // const score = () => {
-    //     return gameScore;
-    // };
-    //
-    // return {
-    //     roll,
-    //     score
-    // }
 
     let threeSeats;
-    let leftSec;
-    let middleSec;
-    let rightSec;
+    let leftSec = 0;
+    let middleSec = 0;
+    let rightSec = 0;
+    let eachRowArr = [];
+    let eachRowBookings = '';
+
+
+    const sortRows = () => {
+        if (eachRowBookings.match(/[A-C]/)) {
+            leftSec += 0;
+        } else {
+            leftSec += 1;
+        }
+
+        if ((eachRowBookings.search(/[D-G]/)) < 0) {
+            middleSec += 2;
+        }
+        if (eachRowBookings.match(/[D]/) || (eachRowBookings.match(/[G]/))) {
+            middleSec += 1;
+        }
+        if (eachRowBookings.match(/[D]/) && (eachRowBookings.match(/[G]/))) {
+            middleSec -= 1;
+        }
+        if (eachRowBookings.match(/[E-F]/)) {
+            middleSec += 0;
+        }
+
+        if (eachRowBookings.match(/[H-J]/)) {
+            rightSec += 0;
+        } else {
+            rightSec += 1;
+        }
+        console.log(leftSec);
+        console.log(middleSec);
+        console.log(rightSec);
+        eachRowArr = [];
+    }
 
     if (bookings === '') {
         threeSeats = 4 * rows;
         return threeSeats;
+    } if (bookings.length < 3) {
+        eachRowBookings = bookings;
+        console.log(eachRowBookings);
+        sortRows();
+        threeSeats = (leftSec + middleSec + rightSec);
+        return threeSeats;
     }
 
-    if (bookings.match(/[A-C]/)) {
-        leftSec = 0;
-    } else {
-        leftSec = 1;
+    let splitBookings = bookings.split(' ').sort();
+    console.log(splitBookings);
+    for (let i=0; i<splitBookings.length; i++) {
+        console.log('start of for');
+        if (`${splitBookings[i]}`.charAt(0) === `${splitBookings[i+1]}`.charAt(0)) {
+            console.log('in the if of for loop');
+            eachRowArr.push(splitBookings[i]);
+            console.log(eachRowArr);
+            eachRowBookings = eachRowArr.join('');
+            console.log(eachRowBookings)
+            console.log(i);
+        } else {
+            console.log('in the else of for loop');
+            eachRowArr.push(splitBookings[i]);
+            console.log(eachRowArr);
+            eachRowBookings = eachRowArr.join('');
+            sortRows();
+        }
+    }
+        threeSeats = (leftSec + middleSec + rightSec);
+        return threeSeats;
+
+
     }
 
-    if (bookings.match(/[^D-G]/)) {
-        middleSec = 2;
-    } if (bookings.match(/[D]/) || (bookings.match(/[G]/))) {
-        middleSec = 1;
-    } if (bookings.match(/[D]/) && (bookings.match(/[G]/))) {
-        middleSec = 0;
-    } if (bookings.match(/[E-F]/)) {
-        middleSec = 0;
-    }
-
-    if (bookings.match(/[H-J]/)) {
-        rightSec = 0;
-    } else {
-        rightSec = 1;
-    }
-    threeSeats = (leftSec + middleSec + rightSec) * rows;
-    return threeSeats;
-}
-    // let leftSec;
-    // const letterCheckAbc = bookings.match(/[A-C]/);
-    // switch (letterCheckAbc){
-    //     case 'A':
-    //     case 'B':
-    //     case 'C':
-    //         leftSec = 0;
-    //         return leftSec;
-    // }
 
 
-    //bookings.split(' ').sort();
-
-
-console.log(seatAllocation('1D',1));
+console.log(seatAllocation('1E',1));
 
 module.exports = seatAllocation;
