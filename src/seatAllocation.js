@@ -6,6 +6,7 @@ const seatAllocation = (bookings, rows) => {
     let rightSec = 0;
     let eachRowArr = [];
     let eachRowBookings = '';
+    let maxRows = rows.toString().length;
 
 
     const sortRows = () => {
@@ -42,7 +43,7 @@ const seatAllocation = (bookings, rows) => {
     if (bookings === '') {
         threeSeats = 4 * rows;
         return threeSeats;
-    } if (bookings.length < 3) {
+    } if (bookings.length === maxRows) {
         eachRowBookings = bookings;
         console.log(eachRowBookings);
         sortRows();
