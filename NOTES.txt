@@ -18,3 +18,7 @@ middle: if E or F booked, options = 0
 if there is an empty row between given bookings, need to give full options - use rows num and range of seat bookings?
 - get range from given rows
 -
+
+Tests:
+- rename to explain more of their general purpose
+- group tests by function

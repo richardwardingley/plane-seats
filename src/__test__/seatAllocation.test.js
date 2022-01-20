@@ -62,13 +62,33 @@ describe("Three seats available together on a plane ", () => {
     });
 
     it('should return 8 if 3 different seats booked in 3 different sections on 3 rows', () => {
-        expect(seatAllocation('1H 2B 3F',2)).toEqual(8);
+        expect(seatAllocation('1H 2B 3F',3)).toEqual(8);
     });
 
     it('should return correct value if bookings not in order', () => {
         expect(seatAllocation('2E 1J',2)).toEqual(5);
         expect(seatAllocation('1H 2B 1C',2)).toEqual(5);
-        expect(seatAllocation('2E 1H 2B 3F 1A 3E',2)).toEqual(5);
+        expect(seatAllocation('2E 1H 2B 3F 1A 3E',3)).toEqual(5);
+    });
+
+    it('should return correct value if there are empty rows before rows with bookings', () => {
+        expect(seatAllocation('2A 2E 3H',3)).toEqual(8);
+        expect(seatAllocation('3B 3F 4I',4)).toEqual(12);
+    });
+
+    it('should return correct value if there are empty rows after rows with bookings', () => {
+        expect(seatAllocation('1A 2E 2H',3)).toEqual(8);
+        expect(seatAllocation('1B 1J 2I',4)).toEqual(13);
+    });
+
+    it('should return correct value if there are empty rows in between rows with bookings', () => {
+        expect(seatAllocation('1E 3E 3H',3)).toEqual(7);
+        expect(seatAllocation('1J 3B 3F 4I',4)).toEqual(11);
+    });
+
+    it('should return correct value if there are empty rows before, in between, and after rows with bookings', () => {
+        expect(seatAllocation('2A 2E 4H',5)).toEqual(16);
+        expect(seatAllocation('2C 2F 4D 4G 6A 6J',7)).toEqual(21);
     });
 
 });
